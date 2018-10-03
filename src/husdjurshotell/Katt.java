@@ -13,5 +13,5 @@ public class Katt extends Djur {
         super(namn,vikt,foder);
         
     }
-       
+   
 }
