@@ -14,19 +14,24 @@ public class HusDjursHotell {
         Djur venus = new Katt("Venus", 5, "kattfoder");
         Djur ove = new Katt("Ove", 3, "kattfoder");
 
-        Djur hypno = new Orm("Hypno", 1, "ormpellets");
+        Djur hypno = new Orm("Hypno", 1, "ormpellets", 20);
+
         while (true) {
-            String djur = JOptionPane.showInputDialog("Vilket djur ska få mat?" + "\n");
+            String djur = JOptionPane.showInputDialog("Vilket djur ska matas?");
+
             if (djur == null) {
                 System.exit(0);
-            }
+            } //else if (isEmpty(djur)) {
+              //  JOptionPane.showMessageDialog(null, "Skriv namnet på djuret du vill mata");
+           // }
+
             switch (djur) {
 
                 case "Sixten":
                     JOptionPane.showMessageDialog(null, sixten.getNamn() + " " + "äter " + sixten.portion() + " gram" + " " + sixten.typAvMat());
                     break;
                 case "Dogge":
-                    JOptionPane.showMessageDialog(null, dogge.getNamn() + " " + "äter " + dogge.portion() + " gram" + " " + sixten.typAvMat());
+                    JOptionPane.showMessageDialog(null, dogge.getNamn() + " " + "äter " + dogge.portion() + " gram" + " " + dogge.typAvMat());
                     break;
                 case "Venus":
                     JOptionPane.showMessageDialog(null, venus.getNamn() + " " + "äter " + venus.portion() + " gram" + " " + venus.typAvMat());
@@ -42,4 +47,9 @@ public class HusDjursHotell {
         }
     }
 
-}
+    //private static boolean isEmpty(String djur) {
+       // if(djur.length() <= 1)
+         //   return true;
+       // return false;
+    }
+

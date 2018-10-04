@@ -6,12 +6,29 @@
 
 package husdjurshotell;
 
+import javax.swing.JOptionPane;
+
 
 public class Katt extends Djur {
-  
-    public Katt(String namn,int vikt,String foder){
-        super(namn,vikt,foder);
-        
+
+    private int vikt;
+    private String foder;
+
+    public Katt(String namn, int vikt, String foder) {
+        super(namn, vikt, foder);
+
+        this.vikt = vikt;
+        this.foder = foder;
+
     }
-   
+
+    @Override
+    public int portion() {
+        return (vikt * 1000 / 150);
+    }
+
+    @Override
+    public String typAvMat() {
+        return foder;
+    }
 }
