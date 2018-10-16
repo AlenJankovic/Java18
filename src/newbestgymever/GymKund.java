@@ -5,11 +5,11 @@ package newbestgymever;
 
 public class GymKund {
     
-    private String namn;
-    private String personNummer;
-    private String år;
-    private String månad;
-    private String dag;
+    protected String namn;
+    protected String personNummer;
+    protected String år;
+    protected String månad;
+    protected String dag;
     
     
     public GymKund(String personNummer,String namn,String år,String månad,String dag){
@@ -37,5 +37,8 @@ public class GymKund {
     public String getDag(String dag){
         return dag;
     }
+
+    
+   
 }
 
