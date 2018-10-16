@@ -23,19 +23,18 @@ public class NewBestGymEver {
         String firstLine;
         String secondLine;
         Path inFilePath;
-       
+
         Date date = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DATE);
-        
+
         System.out.println(year);
         System.out.println(month);
         System.out.println(day);
-             
-        
+
         List<GymKund> personLista = new ArrayList<>();
 
         String[] personDataPartsFirstLine = new String[1];
@@ -46,13 +45,11 @@ public class NewBestGymEver {
 
             while (fileScanner.hasNext()) {
                 firstLine = fileScanner.nextLine();
-                   
-                    String line = firstLine.trim();
-                    
-                
-                    personDataPartsFirstLine = firstLine.split(",");
-                   
-                  
+
+                String line = firstLine.trim();
+
+                personDataPartsFirstLine = firstLine.split(",");
+
                 if (fileScanner.hasNext()) {
                     secondLine = fileScanner.nextLine();
 
@@ -69,11 +66,15 @@ public class NewBestGymEver {
             for (int i = 1; i < personLista.size(); i++) {
 
                 for (GymKund s : personLista) {
-                    String name1 =s.namn.trim();
-                       String namn=  personLista.get(i).getNamn(name1);
-                    if(input.equals(namn))
+                    String name1 = s.namn.trim();
+                    String namn = personLista.get(i).getNamn(name1);
+                    int år = Integer.parseInt(personLista.get(i).getÅr(s.år));
+                    int månad = Integer.parseInt(personLista.get(i).getMånad(s.månad));
+                    int dag = Integer.parseInt(personLista.get(i).getDag(s.dag));
+                   
+                    if (input.equals(namn)) {
                         System.out.println(s.namn + " Finns i listan och är ");
-                     else {
+                    } else {
                         System.out.println(s.namn + " Finns inte");
                     }
                 }
@@ -81,6 +82,3 @@ public class NewBestGymEver {
         }
     }
 }
-
-
- 
