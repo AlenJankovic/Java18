@@ -9,6 +9,8 @@ package newbestgymever;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -61,24 +63,46 @@ public class NewBestGymEver {
                 }
             }
 
-            for (int i = 1; i < personLista.size(); i++) {
+            for (int i = 0; i < personLista.size(); i++) {
                 boolean stop = true;
 
                 String input = JOptionPane.showInputDialog("Skriv namn");
 
+                if (input == null) {
+                    System.exit(0);
+                }
+
                 while (stop) {
                     for (GymKund s : personLista) {
+
                         String name1 = s.namn.trim();
                         String namn = personLista.get(i).getNamn(name1);
                         String personNummer = personLista.get(i).getNamn(s.personNummer);
-                        
+
                         int år = Integer.parseInt(personLista.get(i).getÅr(s.år));
                         int månad = Integer.parseInt(personLista.get(i).getMånad(s.månad));
                         int dag = Integer.parseInt(personLista.get(i).getDag(s.dag));
+                        try {
+                            LocalDateTime medlemFrån = LocalDateTime.of(år, månad, dag, 0, 0, 0);
+                            LocalDateTime datum = LocalDateTime.of(year, month, day, 0, 0, 0);
 
-                        if (input.equals(namn)||input.equals(personNummer)) {
-                            System.out.println(s.namn + " Finns i listan och är ");
-                            break;
+                            long duration = (Duration.between(medlemFrån, datum).toDays());
+
+                            if (input.equals(namn) || input.equals(personNummer)) {
+                                
+                                System.out.println(år + " " + månad + " " + dag);
+                                System.out.println(year + " " + month + " " + day);
+                                System.out.println(duration);
+                                if (duration < 364) {
+                                    System.out.println(s.namn + " är medlem och är nuvarande kund");
+                                } else {
+                                    System.out.println(s.namn + " är en före detta kund");
+                                }
+                                break;
+
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Fel datum format februari");
                         }
 
                     }

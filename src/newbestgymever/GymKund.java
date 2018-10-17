@@ -31,7 +31,7 @@ public class GymKund {
     public String getÅr(String år){
         return år;
     }
-    public String getMånad(String Månad){
+    public String getMånad(String månad){
         return månad;
     }
     public String getDag(String dag){
