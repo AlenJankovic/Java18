@@ -31,10 +31,9 @@ public class NewBestGymEver {
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DATE);
 
-        System.out.println(year);
-        System.out.println(month);
-        System.out.println(day);
-
+        // System.out.println(year);
+        // System.out.println(month);
+        // System.out.println(day);
         List<GymKund> personLista = new ArrayList<>();
 
         String[] personDataPartsFirstLine = new String[1];
@@ -61,24 +60,33 @@ public class NewBestGymEver {
                     personLista.add(kund);
                 }
             }
-            String input = JOptionPane.showInputDialog("Skriv namn");
 
             for (int i = 1; i < personLista.size(); i++) {
+                boolean stop = true;
 
-                for (GymKund s : personLista) {
-                    String name1 = s.namn.trim();
-                    String namn = personLista.get(i).getNamn(name1);
-                    int år = Integer.parseInt(personLista.get(i).getÅr(s.år));
-                    int månad = Integer.parseInt(personLista.get(i).getMånad(s.månad));
-                    int dag = Integer.parseInt(personLista.get(i).getDag(s.dag));
-                   
-                    if (input.equals(namn)) {
-                        System.out.println(s.namn + " Finns i listan och är ");
-                    } else {
-                        System.out.println(s.namn + " Finns inte");
+                String input = JOptionPane.showInputDialog("Skriv namn");
+
+                while (stop) {
+                    for (GymKund s : personLista) {
+                        String name1 = s.namn.trim();
+                        String namn = personLista.get(i).getNamn(name1);
+                        String personNummer = personLista.get(i).getNamn(s.personNummer);
+                        
+                        int år = Integer.parseInt(personLista.get(i).getÅr(s.år));
+                        int månad = Integer.parseInt(personLista.get(i).getMånad(s.månad));
+                        int dag = Integer.parseInt(personLista.get(i).getDag(s.dag));
+
+                        if (input.equals(namn)||input.equals(personNummer)) {
+                            System.out.println(s.namn + " Finns i listan och är ");
+                            break;
+                        }
+
                     }
+                    stop = false;
                 }
+
             }
         }
+
     }
 }
