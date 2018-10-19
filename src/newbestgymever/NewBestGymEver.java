@@ -29,7 +29,7 @@ public class NewBestGymEver {
         String secondLine;
         Path inFilePath;
         Path outFilePath;
-        
+
         Date date = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
@@ -37,26 +37,24 @@ public class NewBestGymEver {
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DATE);
 
-       
         List<GymKund> personLista = new ArrayList<>();
 
         String[] personDataPartsFirstLine = new String[1];
         String[] personDataSecondLine = new String[2];
+
         inFilePath = Paths.get("src\\newbestgymever\\customers.txt");
         outFilePath = Paths.get("src\\newbestgymever\\medlemar.txt");
-        
+
         try (Scanner fileScanner = new Scanner(inFilePath)) {
 
             while (fileScanner.hasNext()) {
+
                 firstLine = fileScanner.nextLine();
-
                 String line = firstLine.trim();
-
                 personDataPartsFirstLine = firstLine.split(",");
 
                 if (fileScanner.hasNext()) {
                     secondLine = fileScanner.nextLine();
-
                     personDataSecondLine = secondLine.trim().split("-");
 
                     GymKund kund = new GymKund(personDataPartsFirstLine[0], personDataPartsFirstLine[1], personDataSecondLine[0], personDataSecondLine[1],
@@ -69,13 +67,15 @@ public class NewBestGymEver {
             for (int i = 0; i < personLista.size(); i++) {
                 boolean stop = true;
 
-                String input = JOptionPane.showInputDialog("Skriv namn");
+                String input = JOptionPane.showInputDialog("Skriv namn eller personnummer för att söka i registret : ");
+                GymKund kund1 = new GymKund(personDataPartsFirstLine[0], personDataPartsFirstLine[1], personDataSecondLine[0], personDataSecondLine[1], personDataSecondLine[2]);
 
                 if (input == null) {
                     System.exit(0);
                 }
 
                 while (stop) {
+
                     for (GymKund s : personLista) {
 
                         String name1 = s.namn.trim();
@@ -85,7 +85,7 @@ public class NewBestGymEver {
                         int år = Integer.parseInt(personLista.get(i).getÅr(s.år));
                         int månad = Integer.parseInt(personLista.get(i).getMånad(s.månad));
                         int dag = Integer.parseInt(personLista.get(i).getDag(s.dag));
-                       
+
                         try {
                             LocalDateTime medlemFrån = LocalDateTime.of(år, månad, dag, 0, 0, 0);
                             LocalDateTime datum = LocalDateTime.of(year, month, day, 0, 0, 0);
@@ -93,29 +93,26 @@ public class NewBestGymEver {
                             long duration = (Duration.between(medlemFrån, datum).toDays());
 
                             if (input.equals(namn) || input.equals(personNummer)) {
-                                
-                                System.out.println(år + " " + månad + " " + dag);
-                                System.out.println(year + " " + month + " " + day);
-                                System.out.println(duration);
-                               
+
                                 if (duration < 365) {
                                     System.out.println(s.namn + " är medlem och är nuvarande kund");
-                                    
-                                    //PrintWriter w = new PrintWriter(
-                                    //Files.newBufferedWriter(outFilePath));
-                                    
-                                    PrintWriter output = new PrintWriter(new FileOutputStream("src\\newbestgymever\\medlemar.txt", true)); 
-                                    output.print(s.getNamn(s.namn)+" med personnummret: " +s.getPersonNummer(personNummer)+
-                                                 " Har Varit och tränat: "+datum.format(DateTimeFormatter.ISO_DATE)+ "\n");
-                                   output.close();
-                                } else {
+
+                                    try (PrintWriter output = new PrintWriter(new FileOutputStream("src\\newbestgymever\\medlemar.txt", true))) {
+                                        output.print(s.getNamn(s.namn) + " med personnummret: " + s.getPersonNummer(personNummer)
+                                                + " Har Varit och tränat: " + datum.format(DateTimeFormatter.ISO_DATE) + "\n");
+                                        output.flush();
+                                    }
+
+                                } else if (duration > 365) {
                                     System.out.println(s.namn + " är en före detta kund");
                                 }
+
                                 break;
 
                             }
+
                         } catch (Exception e) {
-                            System.out.println("Fel datum format februari");
+                            System.out.println("Okänd fel, datum format");
                         }
 
                     }
@@ -123,9 +120,9 @@ public class NewBestGymEver {
                 }
 
             }
+
         }
 
     }
 
-   
 }

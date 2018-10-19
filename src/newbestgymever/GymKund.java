@@ -2,49 +2,45 @@
 
 package newbestgymever;
 
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-
 public class GymKund {
-    
+
     protected String namn;
     protected String personNummer;
     protected String år;
     protected String månad;
     protected String dag;
-    
-    
-    public GymKund(String personNummer,String namn,String år,String månad,String dag){
+
+    public GymKund(String personNummer, String namn, String år, String månad, String dag) {
         this.namn = namn;
         this.personNummer = personNummer;
         this.år = år;
         this.månad = månad;
         this.dag = dag;
-        
+
     }
-    
-    public String getNamn(String namn){
+
+    public String getNamn(String namn) {
         return namn;
     }
-    public String getPersonNummer(String personNummer){
+
+    public String getPersonNummer(String personNummer) {
         return personNummer;
     }
-    
-    public String getÅr(String år){
+
+    public String getÅr(String år) {
         return år;
     }
-    public String getMånad(String månad){
+
+    public String getMånad(String månad) {
         return månad;
     }
-    public String getDag(String dag){
+
+    public String getDag(String dag) {
         return dag;
     }
 
-    
+    public void print() {
+        System.out.println("Inte medlem ");
+    }
 
-    
-   
 }
-
