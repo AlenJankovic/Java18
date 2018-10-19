@@ -68,12 +68,16 @@ public class NewBestGymEver {
                 boolean stop = true;
 
                 String input = JOptionPane.showInputDialog("Skriv namn eller personnummer för att söka i registret : ");
-                GymKund kund1 = new GymKund(personDataPartsFirstLine[0], personDataPartsFirstLine[1], personDataSecondLine[0], personDataSecondLine[1], personDataSecondLine[2]);
+               
 
                 if (input == null) {
                     System.exit(0);
                 }
-
+//                for (GymKund s : personLista)
+//                if(input != s.getNamn(s.namn) ){
+//                        System.out.println("Obehörig");
+//                        break;
+//                }
                 while (stop) {
 
                     for (GymKund s : personLista) {
